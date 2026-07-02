@@ -1,0 +1,37 @@
+class Solution {
+public:
+    ListNode* swapNodes(ListNode* head, int k) {
+
+        int len = 0;
+        ListNode* temp = head;
+
+        while (temp) {
+            len++;
+            temp = temp->next;
+        }
+
+        ListNode* first = head;
+        for (int i = 1; i < k; i++)
+            first = first->next;
+
+        ListNode* second = head;
+        for (int i = 1; i < len - k + 1; i++)
+            second = second->next;
+
+        swap(first->val, second->val);
+
+        return head;
+    }
+};
+| Question                         | Main Logic                 |
+| -------------------------------- | -------------------------- |
+| Remove Nth Node From End         | Fast & Slow gap            |
+| Find Kth Node From End           | Fast & Slow                |
+| Middle of Linked List            | Fast moves 2, slow moves 1 |
+| Delete Middle Node               | Find middle, keep previous |
+| Rotate List                      | Length + reconnect         |
+| Reorder List                     | Middle + Reverse + Merge   |
+| Palindrome Linked List           | Middle + Reverse + Compare |
+| Partition List                   | Two dummy lists            |
+| Merge Two Sorted Lists           | Dummy node + two pointers  |
+| Intersection of Two Linked Lists | Two pointers / length      |
