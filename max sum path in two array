@@ -1,0 +1,54 @@
+class Solution {
+  public:
+    int maxPathSum(vector<int> &a, vector<int> &b) {
+        int m = a.size();
+        int n = b.size();
+        
+        int i = 0, j = 0;
+        int sumA = 0, sumB = 0;
+        int totalSum = 0;
+        
+        // Traverse both sorted arrays simultaneously
+        while (i < m && j < n) {
+            if (a[i] < b[j]) {
+                sumA += a[i];
+                i++;
+            } 
+            else if (b[j] < a[i]) {
+                sumB += b[j];
+                j++;
+            } 
+            else { // Common element found (a[i] == b[j])
+                // Add the maximum sum segment accumulated so far + the common element
+                totalSum += max(sumA, sumB) + a[i];
+                
+                // Reset sub-path tracking for the next segment
+                sumA = 0;
+                sumB = 0;
+                i++;
+                j++;
+            }
+        }
+        
+        // Accumulate remaining elements from array a, if any
+        while (i < m) {
+            sumA += a[i];
+            i++;
+        }
+        
+        // Accumulate remaining elements from array b, if any
+        while (j < n) {
+            sumB += b[j];
+            j++;
+        }
+        
+        // Select the final optimal ending path segment
+        totalSum += max(sumA, sumB);
+        
+        return totalSum;
+    }
+};
+
+Input: a[] = [2, 3, 7, 10, 12], b[] = [1, 5, 7, 8]
+Output: 35
+Explanation: The path will be (1 + 5 + 7 + 10 + 12) = 35, where 1 and 5 come from arr2 and then 7 is common so we switch to arr1 and add 10 and 12.
