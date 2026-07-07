@@ -1,0 +1,50 @@
+Example 1:
+
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
+Example 2:
+
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        // Base Case: अगर मैट्रिक्स में कोई एलिमेंट नहीं है
+        if (matrix.empty() || matrix[0].empty()) {
+            return false;
+        }
+        
+        int m = matrix.size();    // रो (Rows) की कुल संख्या
+        int n = matrix[0].size(); // कॉलम (Columns) की कुल संख्या
+        
+        // काल्पनिक 1D एरे के हिसाब से लो और हाई पॉइंटर्स सेट करना
+        int low = 0;
+        int high = (m * n) - 1;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            // जादू वाला फॉर्मूला: 1D इंडेक्स (mid) को 2D इंडेक्स (row, col) में बदलना
+            int row = mid / n;
+            int col = mid % n;
+            
+            int currentElement = matrix[row][col];
+            
+            // 1. अगर टारगेट मिल गया
+            if (currentElement == target) {
+                return true;
+            }
+            // 2. अगर करंट एलिमेंट छोटा है, तो दाईं (right) तरफ जाएं
+            else if (currentElement < target) {
+                low = mid + 1;
+            }
+            // 3. अगर करंट एलिमेंट बड़ा है, तो बाईं (left) तरफ जाएं
+            else {
+                high = mid - 1;
+            }
+        }
+        
+        // अगर पूरा सर्च खत्म होने के बाद भी एलिमेंट नहीं मिला
+        return false;
+    }
+};
