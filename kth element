@@ -1,0 +1,26 @@
+
+
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // Map store karega: {Number, Index}
+        unordered_map<int, int> mp;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            int current_num = nums[i];
+            int remaining = target - current_num;
+            
+            // Agar remaining element map mein pehle se hai
+            if (mp.find(remaining) != mp.end()) {
+                return {mp[remaining], i}; // Dono indices return kar diye
+            }
+            
+            // Agar nahi hai, toh current number ko map mein insert karo
+            mp[current_num] = i;
+        }
+        
+        return {}; // Agar koi solution na mile (waise question ke mutabik hamesha ek solution hoga)
+    }
+};
