@@ -1,0 +1,26 @@
+Input: arr[] = [1, 4, 3, 5, 8, 6]
+Output: [1, 8]
+Explanation: minimum and maximum elements of array are 1 and 8
+class Solution {
+  public:
+    vector<int> getMinMax(vector<int> &arr) {
+        // Step 1: Initialize mini and maxi with the first element
+        int mini = arr[0];
+        int maxi = arr[0];
+        
+        // Step 2: Loop through the rest of the array
+        for (size_t i = 1; i < arr.size(); i++) {
+            // Step 3: Check for a smaller element
+            if (arr[i] < mini) {
+                mini = arr[i];
+            }
+            // Step 4: Check for a larger element
+            if (arr[i] > maxi) {
+                maxi = arr[i];
+            }
+        }
+        
+        // Step 5: Return the result as a vector [min, max]
+        return {mini, maxi};
+    }
+};
