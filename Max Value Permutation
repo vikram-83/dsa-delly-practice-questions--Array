@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int maxValue(vector<int> &arr) {
+        const int MOD = 1000000007;
+
+        // Step 1: Sort the array
+        sort(arr.begin(), arr.end());
+
+        long long ans = 0;
+
+        // Step 2: Calculate Σ(arr[i] * i)
+        for (int i = 0; i < arr.size(); i++) {
+            ans = (ans + (1LL * arr[i] * i) % MOD) % MOD;
+        }
+
+        return (int)ans;
+    }
+};
+arr = [5, 3, 2, 4, 1]
+ 
+| Index | 0 | 1 | 2 | 3 | 4 |
+| ----- | - | - | - | - | - |
+| Array | 1 | 2 | 3 | 4 | 5 |
+
+
+| i | arr[i] | arr[i] × i | ans |
+| - | ------ | ---------- | --- |
+| 0 | 1      | 1×0 = 0    | 0   |
+| 1 | 2      | 2×1 = 2    | 2   |
+| 2 | 3      | 3×2 = 6    | 8   |  
+| 3 | 4      | 4×3 = 12   | 20  |
+| 4 | 5      | 5×4 = 20   | 40  |
+
+
+ans = 40
