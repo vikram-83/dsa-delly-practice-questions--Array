@@ -1,0 +1,44 @@
+Longest Consecutive Path in Binary tree
+class Solution {
+  public:
+
+    void solve(Node* root, int currLen, int &ans) {
+
+        if (root == NULL)
+            return;
+
+        // Update maximum length
+        ans = max(ans, currLen);
+
+        // Check left child
+        if (root->left) {
+            if (root->left->data == root->data + 1)
+                solve(root->left, currLen + 1, ans);
+            else
+                solve(root->left, 1, ans);
+        }
+
+        // Check right child
+        if (root->right) {
+            if (root->right->data == root->data + 1)
+                solve(root->right, currLen + 1, ans);
+            else
+                solve(root->right, 1, ans);
+        }
+    }
+
+    int longestConsecutive(Node* root) {
+
+        if (root == NULL)
+            return -1;
+
+        int ans = 1;
+
+        solve(root, 1, ans);
+
+        if (ans == 1)
+            return -1;
+
+        return ans;
+    }
+};
